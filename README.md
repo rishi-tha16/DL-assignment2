@@ -4,9 +4,6 @@
 This project builds a Sequence-to-Sequence (Seq2Seq) model using LSTM layers in TensorFlow/Keras to transliterate Latin script (English alphabet) into Devanagari script (Hindi).
 
 ---
-
----
-
 ## 📌 Key Highlights
 
 - **Model Type**: Sequence-to-Sequence with LSTM encoder-decoder.
