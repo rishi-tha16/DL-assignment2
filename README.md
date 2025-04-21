@@ -1,3 +1,102 @@
+# Question-1
+# 📝 Latin to Devanagari Transliteration using LSTM (Seq2Seq)
+
+This project builds a Sequence-to-Sequence (Seq2Seq) model using LSTM layers in TensorFlow/Keras to transliterate Latin script (English alphabet) into Devanagari script (Hindi).
+
+---
+
+---
+
+## 📌 Key Highlights
+
+- **Model Type**: Sequence-to-Sequence with LSTM encoder-decoder.
+- **Input Language**: Latin (Romanized Hindi).
+- **Target Language**: Devanagari (Hindi).
+- **Embedding**: Trainable embeddings for both input and output sequences.
+- **Loss Function**: Sparse categorical cross-entropy.
+- **Decoder Training**: Teacher forcing used during training.
+
+---
+
+## 🔍 Step-by-Step Overview
+
+### 1. **Load and Preprocess Data**
+- Loads `hi.translit.sampled.train.tsv` (Latin ⇄ Devanagari pairs).
+- Formats inputs and appends `\t` and `\n` to target texts to denote start/end.
+
+### 2. **Vocabulary Creation**
+- Character-level tokenization for both input and output sequences.
+- Mapping created for:
+  - `char → index`
+  - `index → char`
+
+### 3. **Tokenization and Padding**
+- Converts text to sequences of integers.
+- Pads sequences to match maximum sequence length.
+
+### 4. **Model Architecture**
+
+#### Encoder:
+- Input layer → Embedding → LSTM (returns states).
+
+#### Decoder:
+- Input layer → Embedding → LSTM (takes encoder states as initial state) → Dense (softmax over output tokens).
+
+### 5. **Training**
+- Compiled with Adam optimizer and sparse categorical cross-entropy.
+- Trained for 50 epochs with batch size 64 and 20% validation split.
+
+### 6. **Inference Models**
+- Encoder model reused to get latent states from input.
+- Decoder model created to:
+  - Accept previous state and previous token
+  - Predict next token
+  - Loop until `\n` or max sequence length
+
+### 7. **Interactive Inference**
+- Takes user input word in Latin script.
+- Transliterates it to Devanagari using the trained model.
+
+---
+
+
+
+interaction:
+```
+Enter a Latin word (or type 'exit' to quit): namaste
+Predicted Devanagari: नमस्ते
+```
+
+---
+
+## 🧠 Model Summary
+
+- **Embedding Dimension**: 128  
+- **Latent Dimension (LSTM units)**: 256  
+- **Training Epochs**: 50  
+- **Loss Function**: SparseCategoricalCrossentropy  
+- **Batch Size**: 64  
+
+---
+
+## 📚 Dataset Format
+
+The dataset should be a tab-separated file (`.tsv`) with no headers:
+
+```
+देवनागरी	wordinlatin
+...
+
+Example:
+हिन्दी	hindi
+भारत	bharat
+```
+
+---
+
+
+
+
 # Question-2
 # 🎵 GPT-2 Fine-Tuning on Backstreet Boys Lyrics
 
